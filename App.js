@@ -83,5 +83,8 @@ export default function App() {
         <Tab.Screen name="Configurações" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
+
+    
   );
 }
+

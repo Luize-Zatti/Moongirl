@@ -1,63 +1,47 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.content}>
-        {/* Topo com logo */}
+        {/* Logo no topo */}
         <View style={styles.header}>
-          <Image source={require('../assets/logo.png')} style={styles.logo} />
+          <Image
+            source={require('../assets/logo.png')} // ajuste para seu caminho real
+            style={styles.logo}
+          />
         </View>
 
-        {/* Aviso de emergência */}
-         <View style={styles.warningBox}>
+        {/* Caixa de aviso */}
+        <View style={styles.warningBox}>
+          <MaterialIcons name="warning" size={24} color="#fff" />
           <Text style={styles.warningText}>
-            ⚠ <Text style={styles.warningTitle}>Perigo imediato:</Text> Se o agressor estiver armado ou apresentar risco grave, chame a polícia e mantenha distância.
+            CASO ESTEJA EM UMA SITUAÇÃO DE PERIGO, CLIQUE EM UM DOS BOTÕES ABAIXO!
           </Text>
         </View>
 
-        {/* Botão de emergência */}
+        {/* Botão EMERGÊNCIA */}
         <TouchableOpacity style={styles.emergencyButton}>
-          <Text style={styles.emergencyText}>Emergência</Text>
-          <MaterialIcons name="call" size={32} color="#fff" />
+          <Text style={styles.emergencyText}>EMERGÊNCIA</Text>
+          <Ionicons name="call" size={30} color="#fff" />
         </TouchableOpacity>
 
-        {/* Botões menores */}
+        {/* Linha com dois botões */}
         <View style={styles.row}>
           <TouchableOpacity style={styles.alertButton}>
-            <Text style={styles.buttonText}>Alertar{'\n'}Guardiões</Text>
-            <Ionicons name="person-circle" size={30} color="#003f5c" />
+            <Ionicons name="notifications" size={28} color="#fff" style={styles.buttonIcon} />
+            <Text style={styles.buttonText}>ALERTAR{"\n"}GUARDIÕES</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.recordButton}>
-            <Text style={styles.buttonText}>Iniciar{'\n'}gravação</Text>
-            <MaterialIcons name="keyboard-voice" size={30} color="#fff" />
+            <FontAwesome5 name="microphone" size={28} color="#fff" style={styles.buttonIcon} />
+            <Text style={styles.buttonText}>INICIAR{"\n"}GRAVAÇÃO</Text>
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* Menu inferior */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerItem}>
-          <Ionicons name="home" size={24} color="#fff" />
-          <Text style={styles.footerText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.footerItem}>
-          <Ionicons name="mic" size={24} color="#fff" />
-          <Text style={styles.footerText}>Gravações</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.footerItem}>
-          <Ionicons name="people" size={24} color="#fff" />
-          <Text style={styles.footerText}>Guardiões</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.footerItem}>
-          <Ionicons name="settings" size={24} color="#fff" />
-          <Text style={styles.footerText}>Configurações</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -68,82 +52,97 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 16,
-    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   header: {
     alignItems: 'center',
+    marginTop: 30,
+    marginBottom: 10,
   },
   logo: {
-    width: 150,
-    height: 120,
+    width: 160,
+    height: 160,
     resizeMode: 'contain',
-    marginTop: 50
   },
   warningBox: {
-    backgroundColor: '#9b68b4',
-    borderRadius: 10,
-    padding: 15,
-    marginBottom: 10,
-    marginHorizontal: -16, // ocupa a largura total
-    minHeight: 130, // define uma altura mínima
-    justifyContent: 'center', // centraliza o texto verticalmente
+    backgroundColor: '#B48FD1',
+    borderRadius: 15,
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    marginVertical: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
   },
   warningText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
-    lineHeight: 24,
-    textAlign: 'justify', // usa toda a largura de forma uniforme
-    width: '100%',        // ocupa 100% da largura do warningBox
+    fontSize: 15,
+    letterSpacing: 1,
+    textAlign: 'center',
+    textTransform: 'uppercase',
   },
   emergencyButton: {
-    backgroundColor: '#c40000',
-    borderRadius: 15,
-    paddingVertical: 30,
+    backgroundColor: '#C40000',
+    borderRadius: 25,
+    paddingVertical: 60, // Aumentado para aumentar a altura
+    paddingHorizontal: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
     flexDirection: 'row',
-    gap: 12,
+    gap: 20,
+    marginBottom: 30,
     width: '100%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   emergencyText: {
     color: '#fff',
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 34,
+    fontWeight: '900',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   row: {
     flexDirection: 'row',
     gap: 20,
   },
   alertButton: {
-    backgroundColor: '#00dbf3',
+    backgroundColor: '#00DBF3',
     flex: 1,
-    padding: 20,
-    borderRadius: 10,
-    justifyContent: 'space-between',
+    paddingVertical: 25,
+    borderRadius: 15,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   recordButton: {
-    backgroundColor: '#0e721c',
+    backgroundColor: '#0E721C',
     flex: 1,
-    padding: 20,
-    borderRadius: 10,
-    justifyContent: 'space-between',
+    paddingVertical: 25,
+    borderRadius: 15,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 15,
+    fontWeight: 'bold',
     textAlign: 'center',
+    marginTop: 8,
+  },
+  buttonIcon: {
+    marginBottom: 5,
   },
   footer: {
-    backgroundColor: '#9b68b4',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 14,
+    backgroundColor: '#B48FD1',
+    paddingTop: 10,
+    paddingBottom: 20,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
   },
@@ -152,6 +151,15 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: 13,
+    marginTop: 5,
+  },
+  activeFooterButton: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginTop: -10,
   },
 });
