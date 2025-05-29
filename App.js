@@ -78,7 +78,7 @@ export default function App() {
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Gravações" component={HomeScreen} />
+        <Tab.Screen name="Gravações" component={SettingsScreen} />
         <Tab.Screen name="Guardiões" component={HomeScreen} />
         <Tab.Screen name="Configurações" component={SettingsScreen} />
       </Tab.Navigator>
