@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from './screens/homeScreen';
 import SettingsScreen from './screens/settingsScreen';
+import TabIcon from './components/TabIcon';
+import GuardioesScreen from './screens/guardioes';
+import AudioScreen from './screens/audios';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,34 +33,15 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color }) => {
+          tabBarIcon: ({ focused }) => {
             const { icon, label } = getTabIcon(route.name, focused);
-
-            return (
-              <View style={{ alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-                <Ionicons name={icon} size={22} color={color} />
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color,
-                    marginTop: 2,
-                    textAlign: 'center',
-                    width: 80,
-                    fontWeight: 'bold', // <- Negrito aplicado aqui
-                  }}
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                >
-                  {label}
-                </Text>
-              </View>
-            );
+            return <TabIcon icon={icon} label={label} focused={focused} />;
           },
           tabBarStyle: {
             backgroundColor: '#7b4397',
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-            height: 70,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 80,
             paddingBottom: 5,
             paddingTop: 5,
             position: 'absolute',
@@ -64,27 +49,38 @@ export default function App() {
             elevation: 0,
             shadowOpacity: 0,
           },
-          tabBarActiveTintColor: '#fff',
-          tabBarInactiveTintColor: '#ddd',
+          headerShown: false,
+          tabBarShowLabel: false,
           tabBarButton: (props) => (
             <TouchableWithoutFeedback {...props}>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{
+                flex: 1,
+                minWidth: 100, // ✅ Agora o botão tem espaço suficiente
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+              }}>
                 {props.children}
               </View>
             </TouchableWithoutFeedback>
           ),
-          headerShown: false,
-          tabBarShowLabel: false,
+
+
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Gravações" component={SettingsScreen} />
-        <Tab.Screen name="Guardiões" component={HomeScreen} />
+        <Tab.Screen name="Gravações" component={AudioScreen} />
+        <Tab.Screen name="Guardiões" component={GuardioesScreen} />
         <Tab.Screen name="Configurações" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
-
-    
   );
 }
+
+const tabButtonStyle = {
+  flex: 1,
+  height: '90%',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
 
